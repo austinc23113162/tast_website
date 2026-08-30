@@ -5,7 +5,6 @@ import { SiteNav } from "@/components/layout/site-nav";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
-      <div className="h-1 bg-accent" aria-hidden="true" />
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"

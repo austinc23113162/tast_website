@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --test src/lib/env.test.ts src/lib/auth/roles.test.ts src/lib/navigation.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/env.test.ts src/lib/auth/roles.test.ts src/lib/navigation.test.ts src/lib/datetime.test.ts src/lib/db/events.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
