@@ -18,7 +18,7 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-border bg-background">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
         <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">TAST</span>
+          <span className="font-heading text-lg font-semibold text-foreground">TAST</span>
           <span className="mx-2 text-border">·</span>
           Taiwanese Association of Students at Tufts
         </p>

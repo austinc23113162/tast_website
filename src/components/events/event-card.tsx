@@ -10,7 +10,7 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   return (
-    <article className="flex h-full min-h-0 flex-col rounded-xl border border-border bg-card p-5">
+    <article className="content-card flex h-full min-h-0 flex-col rounded-xl border border-border bg-card p-5">
       <h2 className="line-clamp-1 text-lg font-semibold break-words text-foreground">
         <Link
           href={`/events/${event.id}`}

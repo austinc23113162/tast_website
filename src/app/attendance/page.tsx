@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function AttendancePage() {
   return (
     <PlaceholderPage
+      eyebrow="Members"
       title="Attendance"
       description="Track check-ins for TAST events."
       emptyTitle="Attendance tracker coming soon"

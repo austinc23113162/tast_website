@@ -10,7 +10,7 @@ export function EboardMemberCard({ member }: EboardMemberCardProps) {
     .join(" · ");
 
   return (
-    <article className="flex h-full min-h-0 flex-col rounded-xl border border-border bg-card p-5">
+    <article className="content-card flex h-full min-h-0 flex-col rounded-xl border border-border bg-card p-5">
       <p className="text-xs font-medium tracking-wide text-accent uppercase">
         {member.position}
       </p>

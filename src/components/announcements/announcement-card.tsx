@@ -1,5 +1,7 @@
 "use client";
 
+import { Pin } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -21,9 +23,14 @@ export function AnnouncementCard({ announcement }: AnnouncementCardProps) {
   return (
     <Dialog>
       <DialogTrigger
-        className="flex h-full min-h-0 w-full flex-col rounded-xl border border-border bg-card p-5 text-left outline-none transition-colors hover:bg-muted/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="content-card relative flex h-full min-h-0 w-full flex-col rounded-xl border border-border bg-card p-5 pr-10 text-left outline-none hover:bg-muted/40 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
         aria-label={`Open announcement: ${announcement.title}`}
       >
+        <Pin
+          className="pointer-events-none absolute top-2 right-2.5 size-5 rotate-45 text-accent"
+          strokeWidth={2.25}
+          aria-hidden="true"
+        />
         <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
           {dateLabel}
         </p>
@@ -39,11 +46,11 @@ export function AnnouncementCard({ announcement }: AnnouncementCardProps) {
           <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
             {dateLabel}
           </p>
-          <DialogTitle className="text-lg leading-snug">
+          <DialogTitle className="font-sans text-lg font-semibold leading-snug text-foreground">
             {announcement.title}
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription className="whitespace-pre-wrap text-sm leading-relaxed">
+        <DialogDescription className="font-sans whitespace-pre-wrap text-sm leading-relaxed break-words text-muted-foreground">
           {announcement.content}
         </DialogDescription>
       </DialogContent>

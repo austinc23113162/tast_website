@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { PageHeader } from "@/components/layout/page-header";
-import { SiteContainer } from "@/components/layout/site-container";
+import { PageShell } from "@/components/layout/page-hero";
 import { Button } from "@/components/ui/button";
 import { formatEventRange } from "@/lib/datetime";
 import { getEventById, listEvents } from "@/lib/db/events";
@@ -37,13 +36,16 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   }
 
   return (
-    <SiteContainer id="main-content">
+    <PageShell
+      eyebrow="Events"
+      title={event.title}
+      description={formatEventRange(event.start_time, event.end_time)}
+    >
       <p className="text-sm text-muted-foreground">
         <Link href="/events" className="underline-offset-4 hover:underline">
-          Events
+          Back to upcoming events
         </Link>
       </p>
-      <PageHeader className="mt-4" title={event.title} />
       <dl className="mt-8 max-w-2xl space-y-4 text-sm">
         <div>
           <dt className="font-medium text-foreground">When</dt>
@@ -78,6 +80,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
           </Button>
         </div>
       ) : null}
-    </SiteContainer>
+    </PageShell>
   );
 }

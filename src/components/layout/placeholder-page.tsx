@@ -1,12 +1,12 @@
 import { EmptyState } from "@/components/layout/empty-state";
-import { PageHeader } from "@/components/layout/page-header";
-import { SiteContainer } from "@/components/layout/site-container";
+import { PageShell } from "@/components/layout/page-hero";
 
 type PlaceholderPageProps = {
   title: string;
   description: string;
   emptyTitle: string;
   emptyDescription: string;
+  eyebrow?: string;
 };
 
 export function PlaceholderPage({
@@ -14,11 +14,11 @@ export function PlaceholderPage({
   description,
   emptyTitle,
   emptyDescription,
+  eyebrow,
 }: PlaceholderPageProps) {
   return (
-    <SiteContainer id="main-content">
-      <PageHeader title={title} description={description} />
+    <PageShell title={title} description={description} eyebrow={eyebrow}>
       <EmptyState title={emptyTitle} description={emptyDescription} />
-    </SiteContainer>
+    </PageShell>
   );
 }

@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Geist_Mono, Nunito_Sans } from "next/font/google";
 
+import { BoardBackdrop } from "@/components/layout/board-backdrop";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 
 import "./globals.css";
 
-const geistSans = Geist({
+const nunitoSans = Nunito_Sans({
   variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-heading",
   subsets: ["latin"],
 });
 
@@ -33,18 +39,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${nunitoSans.variable} ${caveat.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="relative flex min-h-full flex-col">
+        <BoardBackdrop />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-4 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:ring-2 focus:ring-ring"
         >
           Skip to main content
         </a>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
