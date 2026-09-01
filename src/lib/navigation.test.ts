@@ -19,4 +19,5 @@ test("nested public routes match their own href", () => {
   assert.equal(isNavItemActive("/events/past", "/events/past"), true);
   assert.equal(isNavItemActive("/about", "/about"), true);
   assert.equal(isNavItemActive("/about/team", "/about"), true);
+  assert.equal(isNavItemActive("/account", "/about"), false);
 });

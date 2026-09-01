@@ -13,38 +13,82 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { signOutAction } from "@/lib/auth/actions";
 import { isNavItemActive, publicNavItems } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
-export function SiteNav() {
+type SiteNavProps = {
+  signedIn: boolean;
+};
+
+function AuthControls({
+  signedIn,
+  onNavigate,
+  className,
+}: {
+  signedIn: boolean;
+  onNavigate?: () => void;
+  className?: string;
+}) {
+  if (signedIn) {
+    return (
+      <div className={cn("flex items-center gap-1", className)}>
+        <Button variant="ghost" render={<Link href="/account" />} onClick={onNavigate}>
+          Account
+        </Button>
+        <form action={signOutAction}>
+          <Button type="submit" variant="outline">
+            Log out
+          </Button>
+        </form>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn("flex items-center gap-1", className)}>
+      <Button variant="ghost" render={<Link href="/login" />} onClick={onNavigate}>
+        Log in
+      </Button>
+      <Button render={<Link href="/signup" />} onClick={onNavigate}>
+        Sign up
+      </Button>
+    </div>
+  );
+}
+
+export function SiteNav({ signedIn }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <nav className="hidden lg:block" aria-label="Primary">
-        <ul className="flex items-center gap-1">
-          {publicNavItems.map((item) => {
-            const active = isNavItemActive(pathname, item.href);
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      <div className="hidden items-center gap-3 lg:flex">
+        <nav aria-label="Primary">
+          <ul className="flex items-center gap-1">
+            {publicNavItems.map((item) => {
+              const active = isNavItemActive(pathname, item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <AuthControls signedIn={signedIn} />
+      </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger
@@ -82,6 +126,13 @@ export function SiteNav() {
                 );
               })}
             </ul>
+            <div className="mt-4 border-t border-border pt-4">
+              <AuthControls
+                signedIn={signedIn}
+                className="flex-col items-stretch"
+                onNavigate={() => setOpen(false)}
+              />
+            </div>
           </nav>
         </SheetContent>
       </Sheet>

@@ -208,7 +208,7 @@ Store `role` on `profiles` as `'member' | 'admin'`, default `'member'`. E-Board 
 - About, Contact, E-Board (from `eboard_members` + profiles).
 - Loading, error, and empty states.
 
-### Phase 4 — Auth
+### Phase 4 — Auth ✅
 
 - Sign up / login / logout / session callback.
 - Protected member routes.
