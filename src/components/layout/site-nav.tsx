@@ -19,20 +19,28 @@ import { cn } from "@/lib/utils";
 
 type SiteNavProps = {
   signedIn: boolean;
+  isAdmin: boolean;
 };
 
 function AuthControls({
   signedIn,
+  isAdmin,
   onNavigate,
   className,
 }: {
   signedIn: boolean;
+  isAdmin: boolean;
   onNavigate?: () => void;
   className?: string;
 }) {
   if (signedIn) {
     return (
       <div className={cn("flex items-center gap-1", className)}>
+        {isAdmin ? (
+          <Button variant="ghost" render={<Link href="/admin" />} onClick={onNavigate}>
+            Admin
+          </Button>
+        ) : null}
         <Button variant="ghost" render={<Link href="/account" />} onClick={onNavigate}>
           Account
         </Button>
@@ -57,7 +65,7 @@ function AuthControls({
   );
 }
 
-export function SiteNav({ signedIn }: SiteNavProps) {
+export function SiteNav({ signedIn, isAdmin }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -87,7 +95,7 @@ export function SiteNav({ signedIn }: SiteNavProps) {
             })}
           </ul>
         </nav>
-        <AuthControls signedIn={signedIn} />
+        <AuthControls signedIn={signedIn} isAdmin={isAdmin} />
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
@@ -129,6 +137,7 @@ export function SiteNav({ signedIn }: SiteNavProps) {
             <div className="mt-4 border-t border-border pt-4">
               <AuthControls
                 signedIn={signedIn}
+                isAdmin={isAdmin}
                 className="flex-col items-stretch"
                 onNavigate={() => setOpen(false)}
               />

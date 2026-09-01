@@ -16,7 +16,7 @@ export default async function EboardPage() {
   return (
     <PageShell
       title="E-Board"
-      description="Meet the students who organize TAST this year. Names and bios below are placeholders until officers publish their profiles."
+      description="Meet the students who organize TAST this year."
     >
       {members.length === 0 ? (
         <EmptyState

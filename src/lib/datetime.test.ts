@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import {
+  datetimeLocalToIso,
   eventEffectiveEnd,
   formatEventRange,
   isUpcomingEvent,
   partitionEventsByTime,
+  toDatetimeLocalValue,
 } from "./datetime.ts";
 
 const now = new Date("2026-08-30T17:00:00.000Z");
@@ -112,4 +114,13 @@ test("formatEventRange collapses same-day start and end times", () => {
   );
   assert.match(multiDay, /Sep 18/);
   assert.match(multiDay, /Sep 19|Sep 20/);
+});
+
+test("datetime-local values round-trip to ISO", () => {
+  const iso = "2026-09-18T22:00:00.000Z";
+  assert.equal(datetimeLocalToIso(toDatetimeLocalValue(iso)), iso);
+});
+
+test("datetimeLocalToIso rejects invalid input", () => {
+  assert.throws(() => datetimeLocalToIso("not-a-date"));
 });

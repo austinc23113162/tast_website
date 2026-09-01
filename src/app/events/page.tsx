@@ -15,7 +15,7 @@ export default async function EventsPage() {
     <PageShell
       eyebrow="Events"
       title="Upcoming events"
-      description="Dinners, cultural nights, and study breaks hosted by TAST. Sample listings are shown until the E-Board publishes the live calendar."
+      description="Dinners, cultural nights, and study breaks hosted by TAST."
     >
       <EventList
         events={events}

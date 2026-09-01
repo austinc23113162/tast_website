@@ -1,10 +1,13 @@
 import Link from "next/link";
 
 import { SiteNav } from "@/components/layout/site-nav";
+import { isAdmin } from "@/lib/auth/roles";
 import { getAuthUserId } from "@/lib/auth/session";
+import { getOwnProfile } from "@/lib/db/profiles";
 
 export async function SiteHeader() {
-  const signedIn = Boolean(await getAuthUserId());
+  const userId = await getAuthUserId();
+  const profile = userId ? await getOwnProfile() : null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 shadow-sm backdrop-blur-md">
@@ -15,7 +18,7 @@ export async function SiteHeader() {
         >
           TAST
         </Link>
-        <SiteNav signedIn={signedIn} />
+        <SiteNav signedIn={Boolean(userId)} isAdmin={isAdmin(profile?.role)} />
       </div>
     </header>
   );

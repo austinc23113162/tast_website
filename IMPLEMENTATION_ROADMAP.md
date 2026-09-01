@@ -214,7 +214,7 @@ Store `role` on `profiles` as `'member' | 'admin'`, default `'member'`. E-Board 
 - Protected member routes.
 - Profile fields: full name, class year, major.
 
-### Phase 5 — Admin CMS
+### Phase 5 — Admin CMS ✅
 
 - Admin dashboard.
 - CRUD events, announcements, E-Board.

@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PageShell } from "@/components/layout/page-hero";
 import { Button } from "@/components/ui/button";
 import { formatEventRange } from "@/lib/datetime";
-import { getEventById, listEvents } from "@/lib/db/events";
+import { getEventById } from "@/lib/db/events";
+import { listEventPhotos } from "@/lib/db/photos";
 
 type EventDetailPageProps = {
   params: Promise<{ id: string }>;
 };
-
-export async function generateStaticParams() {
-  const events = await listEvents();
-  return events.map((event) => ({ id: event.id }));
-}
 
 export async function generateMetadata({
   params,
@@ -34,6 +31,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   if (!event) {
     notFound();
   }
+
+  const photos = await listEventPhotos(event.id);
 
   return (
     <PageShell
@@ -76,9 +75,26 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               />
             }
           >
-            RSVP
-          </Button>
+          RSVP
+        </Button>
         </div>
+      ) : null}
+      {photos.length > 0 ? (
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          {photos.map((photo) => (
+            <li key={photo.id} className="overflow-hidden rounded-xl border border-border">
+              <div className="relative aspect-video w-full">
+                <Image
+                  src={photo.image_url}
+                  alt={event.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : null}
     </PageShell>
   );
